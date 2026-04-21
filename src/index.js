@@ -3,6 +3,6 @@ exports.handler = async (event) => {
 
     return {
         statusCode: 200,
-        body: JSON.stringify({ message: "Gatão is working" }),
+        body: JSON.stringify({ message: "Gatão working" }),
     };
 };
