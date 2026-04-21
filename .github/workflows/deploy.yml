@@ -1,4 +1,4 @@
-name: Deploy Lambda
+name: Deploy Lambda with Terraform
 
 on:
   push:
@@ -7,27 +7,14 @@ on:
 
 jobs:
   deploy:
-    name: Zip & Deploy to AWS Lambda
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Install dependencies (if any)
-        run: |
-          cd src
-          npm install --omit=dev || true
-
-      - name: Zip Lambda source
-        run: |
-          cd src
-          zip -r ../lambda.zip .
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -36,20 +23,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Deploy to Lambda
-        run: |
-          aws lambda update-function-code \
-            --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
-            --zip-file fileb://lambda.zip
+      - name: Terraform Init
+        run: terraform init
 
-      - name: Wait for update to complete
-        run: |
-          aws lambda wait function-updated \
-            --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }}
+      - name: Terraform Plan
+        run: terraform plan
 
-      - name: Confirm deployment
-        run: |
-          echo "✅ Lambda deployed successfully!"
-          aws lambda get-function --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
-            --query 'Configuration.[FunctionName,LastModified,Runtime]' \
-            --output table
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
