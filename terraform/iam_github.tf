@@ -8,6 +8,8 @@ resource "aws_iam_user_policy" "github_s3_backend_access" {
       {
         Effect = "Allow"
         Action = [
+          "s3:GetBucketPolicy",
+          "s3:PutBucketPolicy",
           "s3:GetObject",
           "s3:PutObject",
           "s3:ListBucket"
