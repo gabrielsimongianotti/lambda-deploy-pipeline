@@ -12,7 +12,16 @@ resource "aws_iam_user_policy" "github_s3_backend_access" {
           "s3:PutBucketPolicy",
           "s3:GetObject",
           "s3:PutObject",
-          "s3:ListBucket"
+          "s3:ListBucket",
+          "iam:GetUserPolicy",
+          "logs:DescribeLogGroups",
+          "iam:PutUserPolicy",
+          "iam:DeleteUserPolicy",
+          "lambda:ListVersionsByFunction",
+          "lambda:GetFunction",
+          "lambda:UpdateFunctionCode",
+          "lambda:UpdateFunctionConfiguration",
+          "s3:GetBucketAcl"
         ]
         Resource = [
           "arn:aws:s3:::lambda-deploy-pipeline-terraform-state",
