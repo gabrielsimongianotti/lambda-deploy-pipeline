@@ -8,7 +8,8 @@ variable "function_name" {
 }
 
 variable "environment" {
-  type = string
+  type    = string
+  default = "staging"
 }
 
 variable "bucket_name" {
