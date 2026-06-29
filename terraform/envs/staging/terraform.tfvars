@@ -1,1 +1,1 @@
-bucket_name = "stating-bucketq"
+bucket_name = "stating"
