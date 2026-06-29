@@ -18,6 +18,9 @@ on:
       aws-lock-dynamodb-table:
         type: string
         required: true
+    secrets:
+      aws-assume-role-arn:
+      required: true
 
 jobs:
   terraform:
