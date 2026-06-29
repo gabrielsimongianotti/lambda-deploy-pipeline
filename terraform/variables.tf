@@ -9,3 +9,7 @@ variable "function_name" {
 variable "environment" {
   type = string
 }
+
+variable "bucket_name" {
+  type = string
+}
