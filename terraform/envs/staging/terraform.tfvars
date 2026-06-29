@@ -1,1 +1,1 @@
-bucket_name = "new-stating-bucket"
+bucket_name = "stating-bucket-test"
