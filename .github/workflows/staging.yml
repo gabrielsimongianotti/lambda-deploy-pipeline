@@ -14,7 +14,9 @@ jobs:
     uses: ./.github/workflows/terraform.yml
     with:
       environment: staging
-      aws-assume-role-arn: ${{ secrets.AWS_ASSUME_ROLE_ARN }}
+      # aws-assume-role-arn: ${{  }}
       aws-region: "us-east-1"
       aws-statefile-s3-bucket: "lambda-deploy-pipeline-gatao"
       aws-lock-dynamodb-table: "github-actions-gabrielsimongianotti-pipeline"
+    secrets:
+      aws-assume-role-arn: ${{ secrets.AWS_ASSUME_ROLE_ARN }}
