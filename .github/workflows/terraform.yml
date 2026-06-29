@@ -20,7 +20,7 @@ on:
         required: true
     secrets:
       aws-assume-role-arn:
-      required: true
+        required: true
 
 jobs:
   terraform:
