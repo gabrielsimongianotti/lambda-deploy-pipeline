@@ -1,4 +1,4 @@
 {
-    "staging": true,
+    "staging": false,
     "prod": false
 }
